@@ -1,0 +1,35 @@
+<section class='content' *ngIf="isUserLoggedIn">
+  <div id='orders' fxLayout='column' fxLayoutGap='2vw' *ngFor="let obilazak of obilasci">
+
+    <mat-card class="orderCard" fxLayout='row' fxLayoutAlign='left' fxLayoutGap='2vw'>
+      <mat-card-header>
+        <mat-card-title id='title'>{{obilazak.postavka["naziv"]}}</mat-card-title>
+        <mat-card-subtitle *ngIf="obilazak.postavka['vrsta']===1">Istorija</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="obilazak.postavka['vrsta']===2">Umetnost</mat-card-subtitle>
+
+      </mat-card-header>
+
+      <img id='avatar' mat-card-sm-image src="{{obilazak.postavka['slika']}}" alt="Slika postavke">
+
+      <mat-card-content fxLayout = 'row' fxLayoutAlign='left' fxLayoutGap='10vw'>
+        <p>Broj eksponata: {{obilazak.postavka["brojEksponata"]}}</p>
+        <p>
+          Vreme obilaska: {{obilazak.postavka["vremeObilaska"]}}
+        </p>
+        <p id="cena"><b>Cena: {{obilazak.postavka["cena"]}}</b></p>
+
+        <p>Status: {{obilazak.status}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button id="button" mat-button (click)='onCancel([obilazak.id])' *ngIf="obilazak.status=='tekući'">Cancel</button>
+        <button id="buttonOceni" mat-button (click)='oceni([obilazak.postavka_id])' *ngIf="obilazak.status=='završen'">Oceni</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</section>
+
+<section id="loginPlease" *ngIf="!isUserLoggedIn">
+  <h1 style="text-align: center;">Da bi ste pristupili planeru morate se prijaviti</h1>
+  <a  routerLink='/login'><h3 style="text-align: center;">Prijavi se</h3></a>
+</section>
+<app-footer></app-footer>

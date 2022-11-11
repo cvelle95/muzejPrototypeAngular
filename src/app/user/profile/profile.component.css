@@ -1,0 +1,18 @@
+form{
+  height: 90%;
+  margin-top: 2vh;
+}
+mat-form-field{
+  width: 50%;
+}
+
+mat-card{
+  margin-top: 3vh;
+  background-color: lightgray;
+  width: 30vw;
+}
+
+#loginPlease{
+  width: 99vw;
+  height: 99vh;
+}

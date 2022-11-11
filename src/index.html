@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ICRAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+
+  <!--<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <df-messenger
+    intent="WELCOME"
+    chat-title="agent007"
+    agent-id="59227d0e-69b2-4575-8e81-915558a67a8c"
+    language-code="en"
+  ></df-messenger>-->
+  <script type="text/javascript">
+    (function(d, m){
+      var kommunicateSettings =
+        {"appId":"37d6135857a3fbbe2448c46ef0174f9fb","popupWidget":true,"automaticChatOpenOnNavigation":true,
+          onInit: function (status, data) {
+            let currentLink = window.location.href;
+          }};
+      var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+      window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+  </script>
+</body>
+</html>

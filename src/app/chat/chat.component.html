@@ -1,0 +1,39 @@
+<h6 class="pb-1 mb-0">Grupni čet<button class="btn btn-sm btn-danger">Pozovi ostale </button></h6>
+
+<div class="chats">
+  <div class="chatbox">
+    <div *ngFor="let chat of chats"> <!-- proci kroz svaki element (chat) u nizu chats iz .ts komponente i napravi ovakav template blok: -->
+      <!--
+          Prikazujemo poruku kada se neko prijavi na cet
+          i prikazujemo da li se prijavio covek ili bot
+      -->
+      <div class="message sent" *ngIf="chat.type!=='pridruzio' && chat.koJe">
+        {{chat.message}}
+        <span class="metadata">
+                    <!-- vreme kada je napravljena poruka -->
+                    <span class="time">{{ chat.napravljenaPoruka | date: 'HH:mm aaa' }}</span>
+                </span>
+      </div>
+
+      <div class="message recieved" *ngIf="chat.type!=='pridruzio' && !chat.koJe">
+        <strong>{{chat.prikaziIme}}</strong><br>
+        {{chat.message}}
+        <span class="metadata">
+                    <span class="time">{{ chat.napravljenaPoruka | date: 'HH:mm aaa' }}</span>
+                </span>
+      </div>
+
+      <p class="pridruzio" *ngIf="chat.type==='pridruzio'">
+                <span class="rounded bg-primary text-white">
+                    {{chat.prikaziIme}} se pridružio/la</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row">
+    <input [(ngModel)]="message" type="text" class="form-control" placeholder="Unesite poruku"><!-- ngModel vezuje ovu vrednost message sa promenljivom message napravljenom u .ts komponente. stya gor se u ovom input-u promeni, to ce odmah u promeljivoj da bude dostupno i obrnuto -->
+    <button [disabled]="!message || sending" (click)="sendMessage(message)" class="btn btn-primary"> <!-- napravljen je ng event (click) da pozove funkciju sendMessage i da joj stavi za argument ono sto je u promelnljivoj message -->
+      {{sending ? 'Sending' : 'Send' }}
+    </button>
+  </div>
+</div>

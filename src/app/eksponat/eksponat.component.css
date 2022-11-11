@@ -1,0 +1,53 @@
+.content {
+  padding: 16px;
+  max-width: 102vw;
+}
+
+.content > mat-card {
+  width: 33vw;
+  max-width: 100vw;
+}
+
+#cardWrapper{
+  max-width: 100vw;
+}
+
+#image{
+  height: 200px;
+}
+
+#comment{
+  width: 40vw;
+  height: 60px;
+  margin-left: 10vw;
+}
+#submitButton{
+  margin-left: 10vw;
+  width: 100px;
+  height: 50px;
+  background-color: goldenrod;
+}
+#textRate{
+  text-align: center;
+}
+#rating{
+  margin-left: 4vw;
+}
+.commentCard{
+  width: 70vw;
+  margin-left: 15vw;
+  margin-top: 2vh;
+  background-color: bisque;
+}
+#starRating{
+  color: goldenrod;
+}
+#oPostavci{
+  display: flex;
+  margin-top: 2vh;
+  margin-left: 5vw;
+  width: 90vw;
+  min-height: 20vh;
+  max-height: 50vh;
+  border: 3px blueviolet dotted ;
+}

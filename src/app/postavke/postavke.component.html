@@ -1,0 +1,72 @@
+<div class="content">
+  <div id="logoPhotoDiv">
+    <p style="text-align: center">
+        <img id="logoPhoto" src="./assets/museum-logo.png">
+    </p>
+  </div>
+
+  <div>
+    <h2 style="text-align: center">TRENUTNO DOSTUPNE POSTAVKE U MUZEJU</h2>
+  </div>
+
+  <div id="filter">
+
+    <form fxLayout="row" fxLayoutAlign='center center' fxLayoutGap='50px' #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+
+      <mat-form-field >
+        <mat-select placeholder="Izaberite kategoriju postavke" [(value)] = "selectedCategories">
+          <mat-option *ngFor="let category of categories" [value]="category.value">
+            {{category.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field hintLabel=''>
+        <input type='number' ngModel matInput placeholder='Minimalna cena' name='minPrice' #nameInput='ngModel'>
+      </mat-form-field>
+
+      <mat-form-field hintLabel=''>
+        <input type='number' ngModel matInput placeholder='Maksimalna cena' name='maxPrice' #nameInput='ngModel'>
+      </mat-form-field>
+
+      <button type='submit' mat-raised-button color='primary' [disabled]='f.invalid'>Filter</button>
+
+    </form>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+
+    <div id="cardWrapper" fxFlex="100%" fxFlex.sm='100%' fxFlex.xs="100%" *ngFor="let postavka of postavke">
+
+      <mat-card class="itemCard" (click)=openItem([postavka.id])>
+        <mat-card-header>
+          <mat-card-title>{{postavka.naziv}}</mat-card-title>
+          <mat-card-subtitle *ngIf="postavka.vrsta==1">Istorija</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="postavka.vrsta==2">Umetnost</mat-card-subtitle>
+
+        </mat-card-header>
+
+        <img id='image' mat-card-image src="{{postavka.slika}}" alt="Photo of item">
+        <mat-card-content>
+          <p>
+            Vreme obilaska: {{postavka.vremeObilaska}}
+          </p>
+          <p>
+            Broj eksponata: {{postavka.brojEksponata}}
+          </p>
+
+          <p id="cena"><b>Cena: {{postavka.cena}}din</b></p>
+        </mat-card-content>
+
+        <!-- <mat-card-actions fxLayout='row'>
+            <button mat-button class='buyButton'>Buy</button>
+        </mat-card-actions> -->
+        <router-outlet></router-outlet>
+      </mat-card>
+
+    </div>
+
+  </div>
+
+</div>
+<app-footer></app-footer>

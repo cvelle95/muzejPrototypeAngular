@@ -1,0 +1,20 @@
+<section>
+  <form fxLayout='column' fxLayoutAlign='center center' fxLayoutGap='20px' #f='ngForm' (ngSubmit)="onSubmit(f.value)">
+    <p style="text-align: center;">Nemate nalog? <a href="/signup">Napravite novi ovde</a></p>
+    <h2 style="text-align: center;margin-bottom: 5vh">PRIJAVA</h2>
+    <mat-form-field>
+      <input type='text' ngModel matInput placeholder='Username' name='username' required #usernameInput='ngModel'>
+      <mat-error *ngIf="usernameInput.hasError('required')">Field should not be empty</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel=''>
+      <input type='password' ngModel matInput placeholder='Password' name='password' required minlength="8" #passInput='ngModel'>
+
+    </mat-form-field>
+
+    <mat-label *ngIf="errorExists" style="color: red;">{{errorText}}</mat-label>
+
+    <button type=submit mat-raised-button color='warn' [disabled]='f.invalid'>Submit</button>
+  </form>
+</section>
+<app-footer></app-footer>

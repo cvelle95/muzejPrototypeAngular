@@ -1,0 +1,111 @@
+<section>
+  <div style="margin-top: 3vh">
+    <h1 style="text-align: center;color: darkgoldenrod">{{selectedPostavka.naziv}}</h1>
+  </div>
+  <div>
+    <p>{{selectedPostavka.opis}}</p>
+  </div>
+  <div style="margin-top: 3vh">
+    <h4>Odabrana postavka sadrzi sledece eksponate</h4>
+  </div>
+<div fxLayout="row wrap" fxLayoutGap="20px grid">
+
+  <div id="cardWrapper" fxFlex="33.3%" fxFlex.sm='49%' fxFlex.xs="100%" *ngFor="let eksponat of listaEksponata">
+
+    <mat-card class="itemCard" >
+      <mat-card-header>
+        <mat-card-title style="color: #125688">{{eksponat.naziv}}</mat-card-title>
+
+      </mat-card-header>
+
+      <img id='image' mat-card-image src="{{eksponat.slika}}" alt="Photo of item">
+      <mat-card-content>
+        <p>
+          <b style="color: darkgoldenrod">Opis:</b> {{eksponat.opis}}
+        </p>
+
+      </mat-card-content>
+
+      <!-- <mat-card-actions fxLayout='row'>
+          <button mat-button class='buyButton'>Buy</button>
+      </mat-card-actions> -->
+      <router-outlet></router-outlet>
+    </mat-card>
+
+  </div>
+</div>
+
+  <!-- rating zvezde i komentar -->
+  <div *ngIf="!disabledRating">
+    <h4 style="text-align: center;color: darkgoldenrod;margin-top: 1vh;margin-bottom: 2vh">Ostavite Všu ocenu i komentar o ovoj postavci</h4>
+  <div id="rating" fxLayout='row' fxLayoutAlign='left' fxLayoutGap='15px'>
+    <button mat-icon-button id="starRating" *ngFor="let r of ratingArr; index as i" (click)='onStarClick(i)'>
+      <mat-icon>
+        {{ returnStar(i) }}
+      </mat-icon>
+    </button>
+
+    <form  #f='ngForm' (ngSubmit)="onSubmit(f.value)" *ngIf="!disabledRating">
+
+      <mat-form-field appearance="outline" id="comment">
+        <input type='text' ngModel matInput placeholder='Napišite Vaše utiske o postavci' name='comment'  #commentInput='ngModel' [disabled]='disabledRating'>
+      </mat-form-field>
+
+      <button id="submitButton" type=submit mat-raised-button color='warn' [disabled]='disabledRating'>Submit</button>
+
+    </form>
+  </div>
+  </div>
+</section>
+
+<!-- O postavci i dodaj u planer dugme -->
+<section>
+  <div fxLayout="column wrap" fxFlex="90%" fxFlex.sm='130%' fxFlex.xs="150%"  id="oPostavci">
+
+    <h3 style="text-align: center;">O Postavci</h3>
+    <div fxLayout = "row wrap" fxLayoutGap="70px">
+      <p ><b>Broj eksponata: </b>{{selectedPostavka.brojEksponata}}</p>
+      <p *ngIf="selectedPostavka.vrsta==1"><b>Vrsta postavke: </b>Istorija</p>
+      <p *ngIf="selectedPostavka.vrsta==2"><b>Vrsta postavke: </b>Umetnost</p>
+      <p><b>Procenjeno vreme potrebno za obilazak: </b>{{selectedPostavka.vremeObilaska}}</p>
+      <p><b>Cena: </b>{{selectedPostavka.cena}}din</p>
+      <button id="button" mat-raised-button color="primary" (click)='addToPlaner()'>Kupi kartu</button>
+
+    </div>
+  </div>
+</section>
+
+<!-- Recenzije korisnika -->
+<section>
+  <h2 style="text-align: center;margin-top: 3vh;">Recenzije korisnika za ovu postavku</h2>
+  <div fxLayout="row" fxLayoutGap="50px" *ngFor="let userComent of userComents">
+
+    <mat-card class="commentCard">
+      <mat-card-header>
+
+        <mat-card-title>
+          {{userComent.ocena}}<span class="material-icons" style="color: goldenrod;">grade</span>
+        </mat-card-title>
+
+        <mat-card-subtitle>{{userService.getUserById(userComent.korisnik_id).ime}}</mat-card-subtitle>
+
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          {{userComent.komentar}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</section>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1">
+<df-messenger
+  intent="itemPage"
+  chat-title="agent007"
+  agent-id="59227d0e-69b2-4575-8e81-915558a67a8c"
+  language-code="en"
+></df-messenger></script>
+<app-footer></app-footer>
+

@@ -1,0 +1,49 @@
+<section>
+  <div>
+    <h2 style="margin-bottom: 2vh;margin-top: 2vh;text-align: center">REGISTRACIJA KORISNIKA</h2>
+  </div>
+  <form fxLayout="column" fxLayoutAlign='center center' fxLayoutGap='20px' #f="ngForm" (ngSubmit)="onSubmit(f.value)"> <!--fxLayout='' je glavna osa flex layouta a fxLayoutAlign poravnanje -->
+
+    <mat-form-field hintLabel=''>
+      <input type='text' ngModel matInput placeholder='Username' name='username' required #nameInput='ngModel'>
+    </mat-form-field>
+
+    <mat-form-field>     <!-- fxLayoutGap='100px' definise razmak izmedju elemenata forme -->
+      <input type="email" ngModel matInput placeholder="Email" name='email' required email #emailInput='ngModel'>
+      <mat-error *ngIf="emailInput.hasError('required')">Field should not be empty</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Please use the correct email format</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel='Minimum password length is 8'>
+      <input type='password' ngModel matInput placeholder='Password' name='password' required minlength="8" #passInput='ngModel'>
+      <!-- <mat-hint align='end'> {{passInput.value?.length}} / 8</mat-hint> -->
+    </mat-form-field>
+
+    <mat-form-field hintLabel=''>
+      <input type='text' ngModel matInput placeholder='Ime' name='name' required #nameInput='ngModel'>
+    </mat-form-field>
+
+    <mat-form-field hintLabel=''>
+      <input type='text' ngModel matInput placeholder='Prezime' name='forename' required #forenameInput='ngModel'>
+    </mat-form-field>
+
+    <mat-form-field hintLabel=''>
+      <input type='text' ngModel matInput placeholder='Adresa' name='adress' required #adressInput='ngModel'>
+    </mat-form-field>
+
+
+    <mat-form-field hintLabel=''>
+      <input type='text' ngModel matInput placeholder='Telefon' name='phone' required #phoneInput='ngModel'>
+    </mat-form-field>
+
+
+
+    <mat-checkbox color='warn' ngModel name='acceptance' required>
+      I accept the terms and conditions of use.
+    </mat-checkbox>
+
+    <button type='submit' mat-raised-button color='warn' [disabled]='f.invalid'>Submit</button>
+    <mat-label>{{errorText}}</mat-label>
+  </form>
+</section>
+<app-footer></app-footer>

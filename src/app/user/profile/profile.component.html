@@ -1,0 +1,51 @@
+<section *ngIf="isUserLoggedIn">
+  <div>
+    <mat-card class="profileCard" fxLayout='column' fxLayoutAlign='center'>
+      <mat-card-header>
+        <mat-card-title id='title'>{{user.ime + " " + user.prezime}}</mat-card-title>
+        <mat-card-subtitle>{{user.username}}</mat-card-subtitle>
+
+      </mat-card-header>
+
+      <img id='avatar' mat-card-sm-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaUTp3j_LpF5r5_gNdvW0g7p057ExdcHWbUQ&usqp=CAU" alt="Avatar">
+    </mat-card>
+  </div>
+
+  <div>
+    <h4 style="text-align: center;margin-top: 2vh;">INFORMACIJE O KORISNIKU</h4>
+  </div>
+
+  <form fxLayout="column" fxLayoutAlign='center center' fxLayoutGap='20px' #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+
+    <mat-form-field appearance="outline">     <!-- fxLayoutGap='100px' definise razmak izmedju elemenata forme -->
+      <mat-label>Email</mat-label>
+      <input type="email" ngModel matInput placeholder="Email" name='email' required email #emailInput='ngModel' [disabled]='disabled' [(ngModel)]='user.email'>
+      <mat-error *ngIf="emailInput.hasError('required')">Field should not be empty</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Please use the correct email format</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel='' appearance="outline">
+      <mat-label>Adresa</mat-label>
+      <input type='text' ngModel matInput placeholder='Adresa' name='adress' required #adressInput='ngModel' [disabled]='disabled' [(ngModel)]='user.adresa'>
+    </mat-form-field>
+
+    <mat-form-field hintLabel='' appearance="outline">
+      <mat-label>Telefon</mat-label>
+      <input type='text' ngModel matInput placeholder='Phone number' name='phone' required #phoneInput='ngModel' [disabled]='disabled' [(ngModel)]='user.telefon'>
+    </mat-form-field>
+
+
+
+    <div fxLayout ='row' id='buttons' fxLayoutGap='15vw'>
+      <button type='button' mat-raised-button color='warn' [disabled]='isEditing' (click)="editMode()">Edit</button>
+      <button type='submit' mat-raised-button color='warn' [disabled]='f.invalid' *ngIf='isEditing'>Submit</button>
+    </div>
+
+  </form>
+</section>
+
+<section id="loginPlease" *ngIf="!isUserLoggedIn">
+  <h1 style="text-align: center;">Da bi ste pristupili profilu morate se prijaviti</h1>
+  <a  routerLink='/login'><h3 style="text-align: center;">Prijavi se</h3></a>
+</section>
+<app-footer></app-footer>
