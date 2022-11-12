@@ -1,6 +1,7 @@
 # ICRAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
+This project was created with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
+It is high-fidelity prototype of user interface for museum aplication that let users make new account, login, search museum exibits and buy tickets for them.
 
 ## Development server
 
